@@ -20,8 +20,10 @@ public class CategoryController {
 
     @GetMapping(path = "/add/{name}")
     public String addCategory(@PathVariable String name) {
-        Category category = new Category();
-        category.setName(name);
+        Category category = categoryRepository.findByName(name);
+        if (category != null)
+            return "Category Exist";
+        category = new Category(name);
         categoryRepository.save(category);
         return "Category added";
     }
