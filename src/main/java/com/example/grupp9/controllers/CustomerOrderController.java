@@ -26,8 +26,26 @@ public class CustomerOrderController {
     @Autowired
     private ProductQuantityRepository productQuantityRepository;
 
+    @Autowired
+    private CityRepository cityRepository;
+
     @PostMapping(path = "/add")
     public String addOrder(@RequestBody CustomerOrder customerOrder) {
+        System.out.println(customerOrder);
+
+        City city = new City(customerOrder.getCustomer().getCity().getName());
+        cityRepository.save(city);
+
+        Customer customer = new Customer();
+        customer.setFirstName(customerOrder.getCustomer().getFirstName());
+        customer.setLastName(customerOrder.getCustomer().getLastName());
+        customer.setCity(city);
+        customer.setZipCode(customerOrder.getCustomer().getZipCode());
+
+        customerRepository.save(customer);
+
+        customerOrder.setCustomer(customer);
+
 
         orderRepository.save(customerOrder);
         return "Order added";
