@@ -45,7 +45,7 @@ public class Grupp9Application {
             categoryRepository.save(category03);
 
             Product product01 = new Product("Coca cola", 15, 100, "Läskedryck med smak av cola", "https://citymarteg.com/image/cache/catalog/cat/Drinks/soda/coca-cola-bottle-330-ml-550x550.jpg",category01,company1);
-            Product product02 = new Product("Ris", 10, 100, "Uncle bens odlade ris", "https://i2.wp.com/traningslara.se/wp-content/uploads/2013/04/potatis.nyttigt1.jpg?fit=850%2C448&ssl=1",category02,company5);
+            Product product02 = new Product("Ris", 10, 100, "Uncle bens odlade ris", "https://d1hr6nb56yyl1.cloudfront.net/product-images/24325-560.jpg",category02,company5);
             Product product03 = new Product("Spagetti", 19, 100, "Pasta från Italien", "https://outofhome.se/media/catalog/product/cache/30/image/600x/9df78eab33525d08d6e5fb8d27136e95/1/0/100048-141413_spaghetti_2.jpg",category02,company3);
             Product product04 = new Product("Köttbullar", 22, 100, "Handgjorda från mamma scan hon själv", "https://www.scan.se/contentassets/4c730ee428b445c1bf1b935befc50ebb/700067_scan_mammas-kottb.350gx12-srs_vinkel2.png?preset=scan-1:1",category03,company4);
             Product product05 = new Product("Choklad",15,200,"Handgjorda från mamma scan hon själv","http://images.sweetauthoring.com/product/48131.png",category03,company4);
