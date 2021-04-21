@@ -31,7 +31,7 @@ public class CustomerOrderController {
 
     @PostMapping(path = "/add")
     public String addOrder(@RequestBody CustomerOrder customerOrder) {
-        System.out.println(customerOrder);
+
 
         City city = new City(customerOrder.getCustomer().getCity().getName());
         cityRepository.save(city);
@@ -48,14 +48,13 @@ public class CustomerOrderController {
 
 
         for (ProductQuantity p: customerOrder.getProducts()) {
-            Product product = productRepository.getByName(p.getProduct().getName());
-            System.out.println(product);
+            Product product = productRepository.getById(p.getProduct().getId());
+            product.setQuantity(product.getQuantity()-p.getQuantity());
 
             p.setProduct(product);
-            //  productRepository.save(product);
+            productRepository.save(product);
             productQuantityRepository.save(p);
         }
-
 
         orderRepository.save(customerOrder);
         return "Order added";
