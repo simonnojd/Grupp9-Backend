@@ -2,13 +2,10 @@ package com.example.grupp9.controllers;
 
 import com.example.grupp9.models.*;
 import com.example.grupp9.repositories.*;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.Cipher;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +18,6 @@ public class CustomerOrderController {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private CityRepository cityRepository;
-
-    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
@@ -32,9 +26,12 @@ public class CustomerOrderController {
     @Autowired
     private ProductQuantityRepository productQuantityRepository;
 
+    @Autowired
+    private CityRepository cityRepository;
+
     @PostMapping(path = "/add")
     public String addOrder(@RequestBody CustomerOrder customerOrder) {
-        System.out.println(customerOrder);
+
 
         City city = new City(customerOrder.getCustomer().getCity().getName());
         cityRepository.save(city);
@@ -49,6 +46,15 @@ public class CustomerOrderController {
 
         customerOrder.setCustomer(customer);
 
+
+        for (ProductQuantity p: customerOrder.getProducts()) {
+            Product product = productRepository.getById(p.getProduct().getId());
+            product.setQuantity(product.getQuantity()-p.getQuantity());
+
+            p.setProduct(product);
+            productRepository.save(product);
+            productQuantityRepository.save(p);
+        }
 
         orderRepository.save(customerOrder);
         return "Order added";
