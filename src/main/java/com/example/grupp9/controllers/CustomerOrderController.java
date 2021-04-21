@@ -3,16 +3,14 @@ package com.example.grupp9.controllers;
 import com.example.grupp9.models.*;
 import com.example.grupp9.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/orders")
 public class CustomerOrderController {
 
@@ -28,28 +26,37 @@ public class CustomerOrderController {
     @Autowired
     private ProductQuantityRepository productQuantityRepository;
 
-    @GetMapping(path = "/add/{productId}+{customerId}+{quantity}")
-    public String addOrder(@PathVariable List<Long> productId, @PathVariable Long customerId, @PathVariable List<Integer>quantity) {
-        List<ProductQuantity> productQuantityList = new ArrayList<>();
-        CustomerOrder order = new CustomerOrder();
-        for (int i = 0; i < productId.size(); i++) {
-            Optional<Product> product = productRepository.findById(productId.get(i));
-            if (product.isEmpty()) {
-                return "Failed.";
-            }
-            ProductQuantity productQuantity = new ProductQuantity(product.get(), quantity.get(i));
-            productQuantityList.add(productQuantity);
-            productQuantityRepository.save(productQuantity);
-        }
-        order.setProducts(productQuantityList);
-        Optional<Customer> customer = customerRepository.findById(customerId);
-       /* if (customer.isPresent()) {
-            order.setCustomer(customer.get());
+    @Autowired
+    private CityRepository cityRepository;
+
+    @PostMapping(path = "/add")
+    public String addOrder(@RequestBody CustomerOrder customerOrder) {
+
+
+        City city = new City(customerOrder.getCustomer().getCity().getName());
+        cityRepository.save(city);
+
+        Customer customer = new Customer();
+        customer.setFirstName(customerOrder.getCustomer().getFirstName());
+        customer.setLastName(customerOrder.getCustomer().getLastName());
+        customer.setCity(city);
+        customer.setZipCode(customerOrder.getCustomer().getZipCode());
+
+        customerRepository.save(customer);
+
+        customerOrder.setCustomer(customer);
+
+
+        for (ProductQuantity p: customerOrder.getProducts()) {
+            Product product = productRepository.getById(p.getProduct().getId());
+            product.setQuantity(product.getQuantity()-p.getQuantity());
+
+            p.setProduct(product);
+            productRepository.save(product);
+            productQuantityRepository.save(p);
         }
 
-        */
-        //else order.setCustomer(new Customer());
-        orderRepository.save(order);
+        orderRepository.save(customerOrder);
         return "Order added";
     }
 

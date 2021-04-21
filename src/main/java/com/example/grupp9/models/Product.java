@@ -11,6 +11,7 @@ public class Product {
     private String name;
     private String description;
     private double price;
+    private int quantity;
     private String picture;
 
     @ManyToOne
@@ -24,9 +25,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, double price, String description, String picture) {
+    public Product(String name, double price, int quantity, String description, String picture) {
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
         this.description = description;
         this.picture = picture;
     }
@@ -38,10 +40,19 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", quantity=" + quantity +
                 ", picture='" + picture + '\'' +
                 ", category=" + category +
                 ", company=" + company +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,14 +63,6 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -68,12 +71,20 @@ public class Product {
         this.description = description;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public double getPrice() {
+        return price;
     }
 
-    public Long getId() {
-        return id;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getPicture() {
@@ -100,3 +111,4 @@ public class Product {
         this.company = company;
     }
 }
+
