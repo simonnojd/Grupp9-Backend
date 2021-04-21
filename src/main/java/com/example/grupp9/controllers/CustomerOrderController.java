@@ -47,6 +47,16 @@ public class CustomerOrderController {
         customerOrder.setCustomer(customer);
 
 
+        for (ProductQuantity p: customerOrder.getProducts()) {
+            Product product = productRepository.getByName(p.getProduct().getName());
+            System.out.println(product);
+
+            p.setProduct(product);
+            //  productRepository.save(product);
+            productQuantityRepository.save(p);
+        }
+
+
         orderRepository.save(customerOrder);
         return "Order added";
     }
