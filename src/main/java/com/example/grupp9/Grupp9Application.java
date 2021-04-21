@@ -45,7 +45,7 @@ public class Grupp9Application {
     @Bean
     public CommandLineRunner productMockData(ProductRepository repository){
         return args -> {
-            Product product01 = new Product("Coca cola", 15, 100, "Läskedryck med smak av cola", "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alko.fi%2Fsv%2Fprodukter%2F720393%2FCoca-Cola%2F&psig=AOvVaw2AHf_RmEA7Puj2JRK0lT2C&ust=1618990180367000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCODT78amjPACFQAAAAAdAAAAABAI");
+            Product product01 = new Product("Coca cola", 15, 100, "Läskedryck med smak av cola", "https://citymarteg.com/image/cache/catalog/cat/Drinks/soda/coca-cola-bottle-330-ml-550x550.jpg");
             Product product02 = new Product("Ris", 10, 100, "Uncle bens odlade ris", "https://i2.wp.com/traningslara.se/wp-content/uploads/2013/04/potatis.nyttigt1.jpg?fit=850%2C448&ssl=1");
             Product product03 = new Product("Spagetti", 19, 100, "Pasta från Italien", "https://outofhome.se/media/catalog/product/cache/30/image/600x/9df78eab33525d08d6e5fb8d27136e95/1/0/100048-141413_spaghetti_2.jpg");
             Product product04 = new Product("Köttbullar", 22, 100, "Handgjorda från mamma scan hon själv", "https://www.scan.se/contentassets/4c730ee428b445c1bf1b935befc50ebb/700067_scan_mammas-kottb.350gx12-srs_vinkel2.png?preset=scan-1:1" );
