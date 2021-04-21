@@ -46,7 +46,7 @@ public class Grupp9Application {
     public CommandLineRunner productMockData(ProductRepository repository){
         return args -> {
             Product product01 = new Product("Coca cola", 15, 100, "Läskedryck med smak av cola", "https://picsum.photos/200");
-            Product product02 = new Product("Ris", 10, 100, "Uncle bens odlade ris", "https://i2.wp.com/traningslara.se/wp-content/uploads/2013/04/potatis.nyttigt1.jpg?fit=850%2C448&ssl=1");
+            Product product02 = new Product("Ris", 10, 100, "Uncle bens odlade ris", "https://picsum.photos/200");
             Product product03 = new Product("Spagetti", 19, 100, "Pasta från Italien", "https://outofhome.se/media/catalog/product/cache/30/image/600x/9df78eab33525d08d6e5fb8d27136e95/1/0/100048-141413_spaghetti_2.jpg");
             Product product04 = new Product("Köttbullar", 22, 100, "Handgjorda från mamma scan hon själv", "https://www.scan.se/contentassets/4c730ee428b445c1bf1b935befc50ebb/700067_scan_mammas-kottb.350gx12-srs_vinkel2.png?preset=scan-1:1" );
 
