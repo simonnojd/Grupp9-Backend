@@ -25,12 +25,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, double price, int quantity, String description, String picture) {
+    public Product(String name, double price, int quantity, String description, String picture, Category category, Company company) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.description = description;
         this.picture = picture;
+        this.category = category;
+        this.company = company;
     }
 
     @Override
