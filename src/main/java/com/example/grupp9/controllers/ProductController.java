@@ -9,6 +9,8 @@ import com.example.grupp9.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -69,6 +71,20 @@ public class ProductController {
     @GetMapping(path = "/all")
     public Iterable<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @GetMapping(path = "/{categoryName}")
+    public Iterable<Product> getProductsByCategory(@PathVariable String categoryName) {
+        Category category = categoryRepository.findByName(categoryName);
+
+        Iterable<Product> findAllProducts = productRepository.findAll();
+        List<Product> productList = new ArrayList<>();
+        for (Product p : findAllProducts) {
+            if (category.getId().equals(p.getCategory().getId())){
+                productList.add(p);
+            }
+        }
+        return productList;
     }
 
 }
