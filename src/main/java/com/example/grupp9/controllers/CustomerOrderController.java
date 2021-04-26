@@ -71,6 +71,19 @@ public class CustomerOrderController {
     return "Order existerar inte";
     }
 
+
+    @GetMapping(path = "/sentOrders")
+    public List<CustomerOrder> sentOrders(){
+
+        return orderRepository.findBySent(true);
+    }
+
+    @GetMapping(path = "/newOrders")
+    public List<CustomerOrder> newOrders(){
+
+        return orderRepository.findBySent(false);
+    }
+
     @GetMapping(path = "/all")
     public Iterable<CustomerOrder> getAllOrder() {
         return orderRepository.findAll();
