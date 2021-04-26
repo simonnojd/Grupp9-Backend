@@ -21,15 +21,19 @@ public class CustomerOrder {
     @JoinColumn(name="customerId", referencedColumnName = "id")
     private Customer customer;
 
+    private boolean sent;
+
 
 
     public CustomerOrder() {
+        this.sent = false;
     }
 
     public CustomerOrder(List<ProductQuantity> products, Date date, Customer customer) {
         this.productsQuantity = products;
         this.date = date;
         this.customer = customer;
+        this.sent = false;
     }
 
     @Override
@@ -78,4 +82,11 @@ public class CustomerOrder {
         return id;
     }
 
+    public boolean isSent() {
+        return sent;
+    }
+
+    public void setSent(boolean sent) {
+        this.sent = sent;
+    }
 }
