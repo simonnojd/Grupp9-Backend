@@ -51,4 +51,10 @@ public class CategoryController {
         else return "Kategorin finns ej i databasen";
     }
 
+    @PostMapping(path = "/delete")
+    public String deleteCategoryById(@RequestBody Category category){
+        categoryRepository.deleteById(category.getId());
+        return "Kategorin är borttagen";
+    }
+
 }

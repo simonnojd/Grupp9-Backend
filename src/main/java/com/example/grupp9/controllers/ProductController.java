@@ -27,7 +27,6 @@ public class ProductController {
 
     @PostMapping(path = "/add")
     public String addProduct(@RequestBody Product p) {
-        //Product product = new Product();
         Category category = categoryRepository.findByName(p.getCategory().getName());
         Company company = companyRepository.findByName(p.getCompany().getName());
 
@@ -59,6 +58,12 @@ public class ProductController {
             return "Produkten har uppdaterats";
         }
         else return "Produkten finns ej i databasen";
+    }
+
+    @PostMapping(path = "/delete")
+    public String deleteProductById(@RequestBody Product product){
+        productRepository.deleteById(product.getId());
+        return "Produkten är borttagen";
     }
 
     @GetMapping(path = "/all")
