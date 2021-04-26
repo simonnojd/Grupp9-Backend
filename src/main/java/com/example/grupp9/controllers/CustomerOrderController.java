@@ -59,6 +59,18 @@ public class CustomerOrderController {
         return "Order added";
     }
 
+    @PostMapping(path = "/send+{id}")
+    public String sendOrder(@PathVariable Long id){
+        Optional<CustomerOrder> order = orderRepository.findById(id);
+        if (order.isPresent()){
+            order.get().setSent(true);
+            orderRepository.save(order.get());
+            return "Order skickad";
+        }
+
+    return "Order existerar inte";
+    }
+
     @GetMapping(path = "/all")
     public Iterable<CustomerOrder> getAllOrder() {
         return orderRepository.findAll();
