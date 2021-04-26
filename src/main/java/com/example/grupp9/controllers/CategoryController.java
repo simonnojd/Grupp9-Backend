@@ -1,6 +1,7 @@
 package com.example.grupp9.controllers;
 
 import com.example.grupp9.models.Category;
+import com.example.grupp9.models.Company;
 import com.example.grupp9.models.Product;
 import com.example.grupp9.repositories.CategoryRepository;
 import com.example.grupp9.repositories.CompanyRepository;
@@ -8,21 +9,22 @@ import com.example.grupp9.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/categories")
+@RequestMapping(path = "/category")
 public class CategoryController {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
     @PostMapping(path = "/add")
-    public String addCategory(@RequestBody  String name) {
-        Category category = categoryRepository.findByName(name);
+    public String addCategory(@RequestBody  Category c) {
+        Category category = categoryRepository.findByName(c.getName());
         if (category != null)
             return "Category Exist";
-        category = new Category(name);
-        categoryRepository.save(category);
+        categoryRepository.save(c);
         return "Category added";
     }
 
@@ -38,10 +40,15 @@ public class CategoryController {
         return "Removed category";
     }
 
-    @GetMapping(path = "/delAll")
-    public String removeAll(){
-        categoryRepository.deleteAll();
-        return "deleted";
+    @PostMapping(path = "/update")
+    public String updateCategory(@RequestBody Category c) {
+        Optional<Category> category = categoryRepository.findById(c.getId());
+
+        if (category.isPresent()){
+            categoryRepository.save(c);
+            return "Kategorin har uppdaterats";
+        }
+        else return "Kategorin finns ej i databasen";
     }
 
 }

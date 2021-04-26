@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/orders")
+@RequestMapping(path = "/order")
 public class CustomerOrderController {
 
     @Autowired
@@ -31,7 +31,6 @@ public class CustomerOrderController {
 
     @PostMapping(path = "/add")
     public String addOrder(@RequestBody CustomerOrder customerOrder) {
-
 
         City city = new City(customerOrder.getCustomer().getCity().getName());
         cityRepository.save(city);
