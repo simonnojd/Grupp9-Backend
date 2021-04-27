@@ -14,6 +14,7 @@ public class Customer {
     @JoinColumn(name = "cityId", referencedColumnName = "id")
     private City city;
     private String zipCode;
+    private String adress;
     private String email;
     private String phoneNumber;
     private String password;
@@ -22,16 +23,15 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, City city, String zipCode,
-                    String email, String phoneNumber, String password, Boolean isAdmin) {
+    public Customer(String firstName, String lastName, City city, String zipCode, String adress, String email, String phoneNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.zipCode = zipCode;
+        this.adress = adress;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.isAdmin = isAdmin;
     }
 
     @Override
@@ -119,5 +119,13 @@ public class Customer {
 
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 }
