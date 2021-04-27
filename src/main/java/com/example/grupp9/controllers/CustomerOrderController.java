@@ -51,7 +51,7 @@ public class CustomerOrderController {
             product.setQuantity(product.getQuantity()-p.getQuantity());
 
             p.setProduct(product);
-            productRepository.save(product);
+
             productQuantityRepository.save(p);
         }
 
