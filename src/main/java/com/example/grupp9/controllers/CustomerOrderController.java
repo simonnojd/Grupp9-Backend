@@ -32,14 +32,20 @@ public class CustomerOrderController {
     @PostMapping(path = "/add")
     public String addOrder(@RequestBody CustomerOrder customerOrder) {
 
-        City city = new City(customerOrder.getCustomer().getCity().getName());
-        cityRepository.save(city);
+        City city = cityRepository.findByName(customerOrder.getCustomer().getCity().getName());
+        if(city == null){
+            city = new City(customerOrder.getCustomer().getCity().getName());
+            cityRepository.save(city);
+        }
 
         Customer customer = new Customer();
         customer.setFirstName(customerOrder.getCustomer().getFirstName());
         customer.setLastName(customerOrder.getCustomer().getLastName());
         customer.setCity(city);
         customer.setZipCode(customerOrder.getCustomer().getZipCode());
+        customer.setAdress(customerOrder.getCustomer().getAdress());
+        customer.setPhoneNumber(customerOrder.getCustomer().getPhoneNumber());
+        customer.setEmail(customerOrder.getCustomer().getEmail());
 
         customerRepository.save(customer);
 
