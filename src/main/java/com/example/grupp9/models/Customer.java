@@ -31,7 +31,7 @@ public class Customer {
         this.adress = adress;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password; //TODO ta bort?
+        this.password = password;
     }
 
     @Override
