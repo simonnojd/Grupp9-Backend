@@ -50,9 +50,9 @@ public class CompanyController {
         else return "Företaget finns ej i databasen";
     }
 
-    @PostMapping(path = "/delete")
-    public String deleteCompanyById(@RequestBody Company company){
-        companyRepository.deleteById(company.getId());
+    @PostMapping(path = "/delete+{id}")
+    public String deleteCompanyById(@PathVariable Long id){
+        companyRepository.deleteById(id);
         return "Företaget är borttaget";
     }
 

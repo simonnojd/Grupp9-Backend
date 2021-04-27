@@ -62,9 +62,9 @@ public class ProductController {
         else return "Produkten finns ej i databasen";
     }
 
-    @PostMapping(path = "/delete")
-    public String deleteProductById(@RequestBody Product product){
-        productRepository.deleteById(product.getId());
+    @PostMapping(path = "/delete+{id}")
+    public String deleteProductById(@PathVariable Long id){
+        productRepository.deleteById(id);
         return "Produkten är borttagen";
     }
 

@@ -68,7 +68,20 @@ public class CustomerOrderController {
             return "Order skickad";
         }
 
+
     return "Order existerar inte";
+    }
+
+
+    @PostMapping(path = "/delete+{id}")
+    public String deleteOrder(@PathVariable Long id){
+        Optional<CustomerOrder> order = orderRepository.findById(id);
+        if (order.isPresent()){
+            orderRepository.deleteById(id);
+            return "Order borttagen";
+        }
+
+        return "Order existerar inte";
     }
 
 
