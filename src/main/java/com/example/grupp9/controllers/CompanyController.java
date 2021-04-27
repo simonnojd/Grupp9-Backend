@@ -19,7 +19,7 @@ public class CompanyController {
     private CompanyRepository companyRepository;
 
     @PostMapping(path = "/add")
-    public String addCategory(@RequestBody  Company c) {
+    public String addCompany(@RequestBody  Company c) {
         Company company = companyRepository.findByName(c.getName());
         if (company != null)
             return "Category Exist";
@@ -28,12 +28,12 @@ public class CompanyController {
     }
 
     @GetMapping(path = "/all")
-    public Iterable<Company> getAllCategories() {
+    public Iterable<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
 
     @GetMapping(path = "/remove/{id}")
-    public String  removeCategory(@PathVariable Long id){
+    public String  removeCompany(@PathVariable Long id){
         Company company = companyRepository.findById(id).get();
         companyRepository.delete(company);
         return "Removed company";
