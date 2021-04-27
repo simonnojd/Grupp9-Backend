@@ -86,13 +86,13 @@ public class CustomerOrderController {
 
 
     @GetMapping(path = "/sentOrders")
-    public List<CustomerOrder> sentOrders(){
+    public Iterable<CustomerOrder> sentOrders(){
 
         return orderRepository.findBySent(true);
     }
 
     @GetMapping(path = "/newOrders")
-    public List<CustomerOrder> newOrders(){
+    public Iterable<CustomerOrder> newOrders(){
 
         return orderRepository.findBySent(false);
     }

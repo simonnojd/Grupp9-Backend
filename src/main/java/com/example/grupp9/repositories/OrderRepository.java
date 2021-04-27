@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface OrderRepository extends CrudRepository<CustomerOrder, Long> {
-    List<CustomerOrder> findBySent (boolean b);
+    Iterable<CustomerOrder> findBySent (boolean b);
 }
 
