@@ -82,6 +82,18 @@ public class CustomerOrderController {
         return orderRepository.findAll();
     }
 
+    @GetMapping(path = "/sentOrders")
+    public Iterable<CustomerOrder> sentOrders(){
+
+        return orderRepository.findBySent(true);
+    }
+
+    @GetMapping(path = "/newOrders")
+    public Iterable<CustomerOrder> newOrders(){
+
+        return orderRepository.findBySent(false);
+    }
+
 }
 
 
