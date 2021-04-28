@@ -18,6 +18,9 @@ public class CompanyController {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @PostMapping(path = "/add")
     public String addCategory(@RequestBody  Company c) {
         Company company = companyRepository.findByName(c.getName());
@@ -52,8 +55,17 @@ public class CompanyController {
 
     @PostMapping(path = "/delete+{id}")
     public String deleteCompanyById(@PathVariable Long id){
-        companyRepository.deleteById(id);
-        return "Företaget är borttaget";
+        Optional<Company> company = companyRepository.findById(id);
+       if(company.isPresent()){
+           for (Product p : productRepository.findAll()) {
+               if (p.getCompany() == company.get())
+                   p.setCompany(null);
+           }
+           companyRepository.deleteById(id);
+           return "Företaget är borttaget";
+       }
+       else return  "Företaget finns inte";
+
     }
 
 }
