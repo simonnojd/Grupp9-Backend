@@ -62,10 +62,15 @@ public class ProductController {
         else return "Produkten finns ej i databasen";
     }
 
-    @PostMapping(path = "/delete")
-    public String deleteProductById(@RequestBody Product product){
-        productRepository.deleteById(product.getId());
-        return "Produkten är borttagen";
+    @PostMapping(path = "/delete+{id}")
+    public String deleteProductById(@PathVariable Long id){
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()){
+            product.get().setActive(false);
+            productRepository.save(product.get());
+            return "Produkten är borttagen från hemsidan";
+        }
+        return "Produkten finns ej.";
     }
 
     @GetMapping(path = "/all")
@@ -73,11 +78,21 @@ public class ProductController {
         return productRepository.findAll();
     }
 
+    @GetMapping(path = "/all/active")
+    public Iterable<Product> getAllActiveProducts() {
+        return productRepository.findAllByActive(true);
+    }
+
+    @GetMapping(path = "/all/notActive")
+    public Iterable<Product> getAllNotActiveProducts() {
+        return productRepository.findAllByActive(false);
+    }
+
     @GetMapping(path = "/{categoryName}")
     public Iterable<Product> getProductsByCategory(@PathVariable String categoryName) {
         Category category = categoryRepository.findByName(categoryName);
 
-        Iterable<Product> findAllProducts = productRepository.findAll();
+        Iterable<Product> findAllProducts = productRepository.findAllByActive(true);
         List<Product> productList = new ArrayList<>();
         for (Product p : findAllProducts) {
             if (category.getId().equals(p.getCategory().getId())){
