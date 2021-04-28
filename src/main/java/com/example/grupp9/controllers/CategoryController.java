@@ -19,6 +19,9 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @PostMapping(path = "/add")
     public String addCategory(@RequestBody  Category c) {
         Category category = categoryRepository.findByName(c.getName());
@@ -33,8 +36,8 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
-    @GetMapping(path = "/remove/{id}")
-    public String  removeCategory(@PathVariable Long id){
+    @GetMapping(path = "/delete+{id}")
+    public String  deleteCategory(@PathVariable Long id){
         Category category = categoryRepository.findById(id).get();
         categoryRepository.delete(category);
         return "Removed category";
@@ -51,10 +54,18 @@ public class CategoryController {
         else return "Kategorin finns ej i databasen";
     }
 
-    @PostMapping(path = "/delete")
-    public String deleteCategoryById(@RequestBody Category category){
-        categoryRepository.deleteById(category.getId());
-        return "Kategorin är borttagen";
-    }
+   /* @PostMapping(path = "/delete+{id}")
+    public String deleteCategoryById(@PathVariable Long id){
+        Optional<Category> category = categoryRepository.findById(id);
+        if(category.isPresent()){
+            for (Product p : productRepository.findAll()) {
+                if (p.getCategory() == category.get())
+                    p.setCompany(null);
+            }
+            categoryRepository.deleteById(id);
+            return "Företaget är borttaget";
+        }
+        else return  "Företaget finns inte";
+    }*/
 
 }

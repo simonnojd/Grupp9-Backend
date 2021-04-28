@@ -25,7 +25,12 @@ public class Product {
     @JoinColumn(name = "companyId", referencedColumnName = "id")
     private Company company;
 
+    private boolean active;
+
+    private String shue;
+
     public Product() {
+        this.active = true;
     }
 
     public Product(String name, double price, int quantity, String description, String picture, Category category, Company company) {
@@ -36,6 +41,7 @@ public class Product {
         this.picture = picture;
         this.category = category;
         this.company = company;
+        this.active = true;
     }
 
     @Override
@@ -114,6 +120,14 @@ public class Product {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
 
