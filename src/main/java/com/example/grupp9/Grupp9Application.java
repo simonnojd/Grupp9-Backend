@@ -50,7 +50,7 @@ public class Grupp9Application {
             Product product04 = new Product("Köttbullar", 22, 100, "Handgjorda från mamma scan hon själv", "https://www.scan.se/contentassets/4c730ee428b445c1bf1b935befc50ebb/700067_scan_mammas-kottb.350gx12-srs_vinkel2.png?preset=scan-1:1",category03,company4);
             Product product05 = new Product("Choklad",15,200,"Handgjorda från mamma scan hon själv","http://images.sweetauthoring.com/product/48131.png",category03,company4);
             Product product06 = new Product("Svartvinbär Saft", 50, 300, "Läskande saft med svartvinbär","https://www.brunnebymusteri.se/wp-content/uploads/2017/06/svartvinbar-saft-dunk.png",category01,company1);
-            Product product07 = new Product("Potatis",3,900,"God potatis från Gränsbo","https://assetsv2.aarstiderne.com/encyclopedia/se/potatis-694-0-75.png",category02,company6);
+            Product product07 = new Product("Potatis",3,900,"God potatis från Gränsbo","https://media.martinservera.se/f_auto,q_auto/prod/martinservera/produkt/2/001/427/$v2/870956_01_produktbild.jpg",category02,company6);
             Product product08 = new Product("Hallon Saft", 50,300,"Läskande saft med hallon","https://media.martinservera.se/f_auto,q_auto/prod/martinservera/produkt/2/001/761/018267_01_produktbild.jpg",category01,company6);
 
             productRepository.save(product01);
