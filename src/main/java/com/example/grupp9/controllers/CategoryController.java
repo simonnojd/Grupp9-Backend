@@ -47,13 +47,6 @@ public class CategoryController {
         return categoryRepository.findAllByActive(false);
     }
 
-    @GetMapping(path = "/delete+{id}")
-    public String  deleteCategory(@PathVariable Long id){
-        Category category = categoryRepository.findById(id).get();
-        categoryRepository.delete(category);
-        return "Removed category";
-    }
-
     @PostMapping(path = "/update")
     public String updateCategory(@RequestBody Category c) {
         Optional<Category> category = categoryRepository.findById(c.getId());
