@@ -36,6 +36,17 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
+
+    @GetMapping(path = "/all/active")
+    public Iterable<Category> getAllActiveCategory() {
+        return categoryRepository.findAllByActive(true);
+    }
+
+    @GetMapping(path = "/all/notActive")
+    public Iterable<Category> getAllNotActiveCategory() {
+        return categoryRepository.findAllByActive(false);
+    }
+
     @GetMapping(path = "/delete+{id}")
     public String  deleteCategory(@PathVariable Long id){
         Category category = categoryRepository.findById(id).get();
@@ -54,18 +65,15 @@ public class CategoryController {
         else return "Kategorin finns ej i databasen";
     }
 
-   /* @PostMapping(path = "/delete+{id}")
+    @PostMapping(path = "/delete+{id}")
     public String deleteCategoryById(@PathVariable Long id){
         Optional<Category> category = categoryRepository.findById(id);
-        if(category.isPresent()){
-            for (Product p : productRepository.findAll()) {
-                if (p.getCategory() == category.get())
-                    p.setCompany(null);
-            }
-            categoryRepository.deleteById(id);
-            return "Företaget är borttaget";
+        if (category.isPresent()){
+            category.get().setActive(false);
+            categoryRepository.save(category.get());
+            return "Kategorin är borttagen från hemsidan";
         }
-        else return  "Företaget finns inte";
-    }*/
+        return "Kategorin finns ej.";
+    }
 
 }

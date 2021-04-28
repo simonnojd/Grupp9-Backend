@@ -11,12 +11,15 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private boolean active;
 
     public Category() {
+        this.active = true;
     }
 
     public Category(String name) {
         this.name = name;
+        this.active = true;
     }
 
     @Override
@@ -42,5 +45,13 @@ public class Category {
 
     public Long getId() {
         return id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
