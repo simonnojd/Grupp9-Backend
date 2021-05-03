@@ -25,7 +25,7 @@ public class CompanyController {
     public String addCompany(@RequestBody  Company c) {
         Company company = companyRepository.findByName(c.getName());
         if (company != null)
-            return "Category Exist";
+            return "Företaget finns";
         companyRepository.save(c);
         return "Företaget tillagd";
     }
