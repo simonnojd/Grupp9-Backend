@@ -26,9 +26,9 @@ public class CategoryController {
     public String addCategory(@RequestBody  Category c) {
         Category category = categoryRepository.findByName(c.getName());
         if (category != null)
-            return "Category Exist";
+            return "Kategorin finns";
         categoryRepository.save(c);
-        return "Category added";
+        return "Kategorin tillagd";
     }
 
     @GetMapping(path = "/all")

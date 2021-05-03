@@ -22,16 +22,16 @@ public class CompanyController {
     private ProductRepository productRepository;
 
     @PostMapping(path = "/add")
-    public String addCategory(@RequestBody  Company c) {
+    public String addCompany(@RequestBody  Company c) {
         Company company = companyRepository.findByName(c.getName());
         if (company != null)
             return "Category Exist";
         companyRepository.save(c);
-        return "company added";
+        return "Företaget tillagd";
     }
 
     @GetMapping(path = "/all")
-    public Iterable<Company> getAllCategories() {
+    public Iterable<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
 

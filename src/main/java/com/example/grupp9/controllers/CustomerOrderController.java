@@ -62,7 +62,7 @@ public class CustomerOrderController {
         }
 
         orderRepository.save(customerOrder);
-        return "Order added";
+        return "Order tillagd";
     }
 
     @PostMapping(path = "/send+{id}")
@@ -74,7 +74,7 @@ public class CustomerOrderController {
             return "Order skickad";
         }
 
-    return "Order existerar intee";
+    return "Order existerar inte";
     }
 
     @GetMapping(path = "/all")

@@ -41,7 +41,7 @@ public class ProductController {
         p.setCompany(company);
 
         productRepository.save(p);
-        return "Product added";
+        return "Produkt tillagd";
     }
 
     @PostMapping(path = "/update")
